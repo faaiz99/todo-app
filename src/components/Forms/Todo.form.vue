@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted, onUpdated } from 'vue';
+import { ref, onUpdated } from 'vue';
 
 
 const date = ref();
@@ -21,8 +21,8 @@ const onDelete = (taskID) => {
 
 const onEdit = (taskID) => {
 	console.log(taskID);
-	tasks.value.filter((item)=>{
-		if(item.taskID = taskID){
+	tasks.value.filter((item) => {
+		if (item.taskID = taskID) {
 			date.value = item.completetionDate
 			task.value = item.taskDescription
 		}
