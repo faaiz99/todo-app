@@ -8,12 +8,6 @@ const task = ref()
 
 const tasks = ref([])
 
-const wrongTask = ref(false)
-
-const wrongTaskId = ref()
-
-
-
 
 const onDelete = (taskID) => {
 	tasks.value = tasks.value.filter((task) => {
