@@ -1,5 +1,5 @@
 <template >
-	<div class="flex-col justify-center">
+	<div class="flex-col border shadow-lg rounded mt-12 h-screen">
 		<TodoForm />
 		<TodoAction />
 	</div>

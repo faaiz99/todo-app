@@ -12,8 +12,9 @@ export const useTodoStore = defineStore('todoStore', () => {
 
 	const authenticated = ref(false)
 
-	const setAuth = () => {
-		authenticated.value = !authenticated.value
+
+	const setAuth = () =>{
+		authenticated.value = !authenticated.value 
 	}
 
 	const onDelete = (taskID) => {
@@ -55,7 +56,7 @@ export const useTodoStore = defineStore('todoStore', () => {
 		onDelete,
 		onEdit,
 		onSubmit,
-		setAuth,
+		setAuth
 	}
 
 })

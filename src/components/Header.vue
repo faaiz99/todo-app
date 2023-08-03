@@ -1,5 +1,4 @@
 <script setup>
-import { ref } from 'vue'
 import { RouterLink } from 'vue-router';
 import { useTodoStore } from '../../store/todo.store';
 import { storeToRefs } from 'pinia'
