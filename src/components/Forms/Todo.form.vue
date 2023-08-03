@@ -1,51 +1,3 @@
-<script setup>
-import { ref, onUpdated } from 'vue';
-import { v4 as uuidv4 } from 'uuid';
-
-const date = ref();
-
-const task = ref()
-
-const tasks = ref([])
-
-
-const onDelete = (taskID) => {
-	tasks.value = tasks.value.filter((task) => {
-		return taskID != task.taskID
-	})
-}
-
-const onEdit = (taskID) => {
-	tasks.value.filter((item) => {
-		if (taskID == item.taskID) {
-			date.value = item.completetionDate
-			task.value = item.taskDescription
-		}
-	})
-	onDelete(taskID)
-}
-
-const onSubmit = () => {
-
-	tasks.value.push({
-		taskID: uuidv4(),
-		completetionDate: date.value,
-		taskDescription: task.value,
-		completed: false
-
-	})
-
-	date.value = ''
-	task.value = ''
-}
-
-onUpdated(() => {
-	//console.log(tasks.value);
-})
-
-
-
-</script>
 <template>
 	<div>
 		<div>
@@ -69,38 +21,20 @@ onUpdated(() => {
 					<div>
 						<button type="submit"
 							class="font-semibold bg-zinc-800 rounded px-3.5 py-1.5 hover:scale-110 w-24 h-10">Add </button>
-
 					</div>
 				</div>
-
 			</form>
-		</div>
-		<div class="flex justify-center text-3xl font-bold mt-12 text-zinc-800 hover:scale-110">
-			<p>Todo List</p>
-		</div>
-		<div class="flex justify-center">
-			<ul>
-				<li class="sm:flex p-2.5 gap-4 justify-center mb-2 " v-for="task in tasks" :key="tasks.tasksID">
-
-					<div class="flex items-baseline">
-						<label class="inline" for="completeTask"></label>
-						<input type="checkbox" id="completeTask" name="completeTask" @click="task.checked = !task.checked">
-						<p class="ml-5 mt-1 font-semibold text-sm relative text-zinc-800"
-							:class="task.checked ? 'line-through' : ''">
-							{{ task.completetionDate }}
-						</p>
-					</div>
-
-					<p class="mt-1 font-normal text-sm text-zinc-800 text-left  w-64 lg:w-96"
-						:class="task.checked ? 'line-through' : ''">
-						{{ task.taskDescription }}</p>
-					<button @click="onEdit(task.taskID)"
-						class="mr-2 mt-2 font-semibold bg-blue-600 rounded h-full px-3.5 py-1.5  hover:scale-110 w-24 ml-auto">Edit</button>
-					<button @click="onDelete(task.taskID)"
-						class=" mt-2 font-semibold bg-red-600 rounded h-full px-3.5 py-1.5  hover:scale-110 w-24 ml-auto ">Delete</button>
-				</li>
-			</ul>
 		</div>
 	</div>
 </template>
+<script setup>
+import { useTodoStore } from '../../../store/todo.store';
+import { storeToRefs } from 'pinia'
+
+const store = useTodoStore()
+const { task, date } = storeToRefs(store)
+const { onSubmit } = store
+
+</script>
+
 
