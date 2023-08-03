@@ -1,6 +1,8 @@
 <template >
 	<form class="border shadow-lg rounded">
-		<div class="flex justify-center mt-4">
+		<div class="flex justify-center mt-4 space-x-2">
+			<img class="w-10 h-10" src="/contract.png" />
+
 			<p class="text-2xl font-bold hover:scale-110 text-zinc-800 ">Let's Sign Up</p>
 		</div>
 		<div class="flex-col space-y-4 p-6 md:w-64 lg:w-96 ">

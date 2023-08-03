@@ -9,6 +9,7 @@ const { onDelete, onEdit } = store
 
 <template >
 	<div class="flex justify-center text-3xl font-bold mt-12 text-zinc-800 hover:scale-110">
+		<img class="w-10 h-10 " src="/system.png" />
 		<p>Todo List</p>
 	</div>
 	<div class="flex justify-center">

@@ -11,7 +11,7 @@ const { authenticated } = storeToRefs(store)
 <template >
 	<div class="flex justify-between mt-2 p-2.5">
 		<div class="flex gap-2">
-			<image class="w-10 h-10" src="../../public/to-do-list.png" />
+			<img class="w-10 h-10" src="/to-do-list.png" />
 			<RouterLink v-if="!authenticated" class="text-2xl font-bold md:text-3xl mt-1 text-zinc-800" to="/">Todo App
 			</RouterLink>
 			<RouterLink v-else class="text-2xl text-zinc-800 font-bold md:text-3xl mt-1" to="/home">Home</RouterLink>

@@ -1,9 +1,10 @@
 <template >
 	<form>
 		<div class="flex-col space-y-4 p-6 md:w-64 lg:w-96 border shadow-lg rounded ">
-			<div class="flex justify-center mt-4">
+			<div class="flex justify-center mt-4 space-x-2">
+				<img class="w-10 h-10" src="/padlock.png" />
 				<p class="text-3xl text-zinc-800 font-bold hover:scale-110">Let's Sign In</p>
-
+		
 			</div>
 			<div class="mb-6">
 				<label for="email" class="block mb-2 text-sm font-medium text-zinc-800 ">Email
