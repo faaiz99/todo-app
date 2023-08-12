@@ -1,7 +1,7 @@
 <template>
-	<div class="flex justify-center space-x-2">
+	<div class="flex justify-center space-x-2 hover:scale-110">
 		<img class="w-10 h-10 mt-3" src="/post-it.png" />
-		<p class=" flex justify-center text-3xl mt-4 text-zinc-800  font-bold hover:scale-110">
+		<p class=" flex justify-center text-2xl mt-4 text-zinc-800  font-bold ">
 			Add Tasks
 		</p>
 	

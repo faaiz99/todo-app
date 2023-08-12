@@ -10,7 +10,7 @@ export const useTodoStore = defineStore('todoStore', () => {
 
 	const tasks = ref([])
 
-	const authenticated = ref(false)
+	const authenticated = ref(true)
 
 	const setAuth = () => {
 		authenticated.value = !authenticated.value
