@@ -2,10 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
- :root {
+
+
+:root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
 
-  /* color-scheme: light dark; */
+  color-scheme: light;
   color: white;
   background-color: #f4f4f5;
 
@@ -14,4 +16,8 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
+  
+}
+::-webkit-calendar-picker-indicator{
+  color-scheme: light;
 }

@@ -1,8 +1,9 @@
-<template >
-	<div class="flex justify-center">
-		<LoginForm />
-	</div>
+<!-- eslint-disable vue/multi-word-component-names -->
+<template>
+  <div class="flex justify-center">
+    <LoginForm />
+  </div>
 </template>
-<script setup>
-import LoginForm from '../Forms/Login.form.vue';
+<script setup lang="ts">
+import LoginForm from '../Forms/Login.form.vue'
 </script>
