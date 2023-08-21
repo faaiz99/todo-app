@@ -3,16 +3,18 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import { v4 as uuidv4 } from 'uuid'
-import { getTasks } from '@/api/fetch'
-import type { ITask } from '@/Types/ITask'
+import { getTodos, getTodo, createTodo, deleteTodo, editTodo } from '@/api/fetch'
+import type { ITodo } from '@/Types/Todo'
 
 
 export const useTodoStore = defineStore('todoStore', {
   state: () => {
     return {
-      task: null as unknown as ITask,
-      tasks: [] as unknown as ITask[],
-      authenticated: false,
+      description: null as unknown as string,
+      completionDate: null as unknown as Date, 
+      todo: null as unknown as ITodo,
+      todos: [] as unknown as ITodo[],
+      authenticated: false as boolean,
     }
   },
   getters: {
@@ -20,9 +22,9 @@ export const useTodoStore = defineStore('todoStore', {
       return this.authenticated
     },
     // /todos
-    async fetchTasks():Promise <void> {
+    async fetchTodos():Promise <void> {
       try{
-        this.tasks = await getTasks()
+        this.todos = await getTodos()
       }
       catch(error){
         console.log(error);
@@ -30,27 +32,36 @@ export const useTodoStore = defineStore('todoStore', {
 
     },
     // /todos/:id
-    async getTask(state) {
+    async getTodo(state) {
 
     },
 
 
   },
-  actions: {
+  actions: { 
     setAuth() {
       this.authenticated = !this.authenticated
     },
+
+    setDescription(description:string){
+      this.description = description
+    },
     // DELETE /todos/:id
-    onDelete(taskID: number) {
+    async onDelete(taskID: number) {
 
     },
     // PATCH /todos/:id
-    onEdit(taskID: number) {
+    async onEdit(taskID: number) {
 
     },
     // POST /todos
-    onSubmit() {
-
+    async onSubmit(completionDate:Date, description:string) {
+      const todo:ITodo = {
+        ICompletionDate:completionDate,
+        IDescription : description,
+        IComplete : false
+      }
+       await createTodo(todo)
     }
   }
 })

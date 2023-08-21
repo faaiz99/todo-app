@@ -4,7 +4,7 @@ import { useTodoStore } from '../../stores/todo.store'
 import { storeToRefs } from 'pinia'
 
 const store = useTodoStore()
-const { task, date } = storeToRefs(store)
+const { completionDate, description} = storeToRefs(store)
 const { onSubmit } = store
 </script>
 
@@ -14,14 +14,14 @@ const { onSubmit } = store
     <p class="flex justify-center text-2xl mt-4 text-zinc-800 font-bold">Add Tasks</p>
   </div>
   <div class="fkex">
-    <form @submit.prevent="onSubmit">
+    <form @submit.prevent="onSubmit(completionDate, description)">
       <div class="m-auto text-center space-y-4 sm:space-y-0 w-64 sm:w-auto  mt-6 p-2 sm:flex sm:justify-center sm:gap-4">
         <div>
           <input
             type="date"
             class="border text-center  border-gray-300 text-zinc-800 text-sm rounded-lg block w-full p-2.5 bg-zinc-100 placeholder-zinc-400"
             required
-            v-model="date"
+            v-model="completionDate"
           />
         </div>
         <div>
@@ -30,7 +30,7 @@ const { onSubmit } = store
             id="task"
             class="border text-center border-gray-300 text-zinc-800 text-sm rounded-lg block w-full p-2.5 bg-zinc-100 placeholder-zinc-400"
             placeholder="Write your task here!"
-            v-model="task"
+            v-model="description"
             required
           />
         </div>

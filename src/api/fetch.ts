@@ -1,10 +1,10 @@
-import type { ITask } from '@/Types/ITask'
+import type { ITodo } from '@/Types/Todo'
 import axios from 'axios'
 axios.defaults.baseURL = 'http://localhost:3000'
 
 // [Nest] 2548  - 08/21/2023, 1:01:56 PM     LOG [RouterExplorer] Mapped {/todos, GET} route +0ms
-export const getTasks = async (): Promise<ITask[]> => {
-	let todos: ITask[] = []
+export const getTodos = async (): Promise<ITodo[]> => {
+	let todos: ITodo[] = []
 	try {
 		todos = await axios.get('/todos')
 	} catch (e) {
@@ -14,45 +14,46 @@ export const getTasks = async (): Promise<ITask[]> => {
 }
 
 // [Nest] 2548  - 08/21/2023, 1:01:56 PM     LOG [RouterExplorer] Mapped {/todos, POST} route +2ms
-export const createTask = async (task: ITask): Promise<ITask[]> => {
-	let todos: ITask[] = []
+export const createTodo = async (todo: ITodo): Promise<ITodo> => {
+	let result: ITodo| null = null
+	console.log('create', todo);
 	try {
-		todos = await axios.post('/todos', task)
+		result = await axios.post('/todos', todo)
 	} catch (e) {
 		console.log(e)
 	}
-	return todos
+	return result as ITodo
 }
 
 // [Nest] 2548  - 08/21/2023, 1:01:56 PM     LOG [RouterExplorer] Mapped {/todos/:id, GET} route +0ms
-export const getTask = async (id: number): Promise<ITask> => {
-	let todo: ITask | null = null
+export const getTodo = async (id: number): Promise<ITodo> => {
+	let todo: ITodo | null = null
 	try {
 		todo = await axios.get(`todo/${id}`)
 	} catch (error) {
 		console.log(error);
 	}
-	return todo as ITask
+	return todo as ITodo
 
 }
 // [Nest] 2548  - 08/21/2023, 1:01:56 PM     LOG [RouterExplorer] Mapped {/todos/:id, PATCH} route +1ms
-export const editTask = async (id: number): Promise<ITask> => {
-	let todo: ITask | null = null
+export const editTodo = async (id: number): Promise<ITodo> => {
+	let todo: ITodo | null = null
 	try {
 		todo = await axios.patch(`todo/${id}`)
 	} catch (error) {
 		console.log(error);
 	}
-	return todo as ITask
+	return todo as ITodo
 
 }
 // [Nest] 2548  - 08/21/2023, 1:01:56 PM     LOG [RouterExplorer] Mapped {/todos/:id, DELETE} route +1ms
-export const deleteTask = async (id: number): Promise<ITask> => {
-	let todo: ITask | null = null
+export const deleteTodo = async (id: number): Promise<ITodo> => {
+	let todo: ITodo | null = null
 	try {
 		todo = await axios.delete(`todo/${id}`)
 	} catch (error) {
 		console.log(error);
 	}
-	return todo as ITask
+	return todo as ITodo
 }
