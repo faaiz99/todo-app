@@ -1,6 +1,6 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
-  <div class="flex-col border shadow-lg rounded mt-12 h-screen">
+  <div class="flex-col border shadow-lg rounded mt-12">
     <TodoForm />
     <TodoAction />
   </div>

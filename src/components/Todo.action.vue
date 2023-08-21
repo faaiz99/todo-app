@@ -1,4 +1,6 @@
 <!-- eslint-disable vue/multi-word-component-names -->
+<!-- eslint-disable vue/valid-v-for -->
+<!-- eslint-disable vue/multi-word-component-names -->
 <script setup lang="ts">
 import { useTodoStore } from '../stores/todo.store'
 import { storeToRefs } from 'pinia'

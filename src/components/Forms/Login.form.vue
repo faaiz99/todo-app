@@ -1,10 +1,10 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
   <form>
-    <div class="flex-col space-y-4 p-6 md:w-64 lg:w-96 border shadow-lg rounded">
+    <div class="flex-col space-y-4 p-6 w-96 border shadow-lg rounded mt-4 sm:mt-32 md:mx-auto">
       <div class="flex justify-center mt-4 space-x-2">
-        <img class="w-10 h-10" src="/padlock.png" />
-        <p class="text-3xl text-zinc-800 font-bold hover:scale-110">Let's Sign In</p>
+        <img class="w-7 h-7" src="/padlock.png" />
+        <p class="text-2xl text-zinc-800 font-semibold">Let's Sign In</p>
       </div>
       <div class="mb-6">
         <label for="email" class="block mb-2 text-sm font-medium text-zinc-800">Email </label>
@@ -45,7 +45,7 @@
       </div>
       <button
         type="submit"
-        class="font-semibold bg-zinc-800 rounded px-3.5 py-1.5 hover:scale-110 w-full"
+        class="font-semibold bg-zinc-800 rounded px-3.5 py-1.5  hover:bg-zinc-700  w-full"
       >
         Sign In
       </button>
