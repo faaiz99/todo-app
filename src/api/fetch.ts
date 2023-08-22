@@ -1,26 +1,27 @@
 import type { ITodo } from '@/Types/Todo'
-import axios from 'axios'
+import axios, { type AxiosResponse } from 'axios'
 axios.defaults.baseURL = 'http://localhost:3000'
 
 // [Nest] 2548  - 08/21/2023, 1:01:56 PM     LOG [RouterExplorer] Mapped {/todos, GET} route +0ms
 export const getTodos = async (): Promise<ITodo[]> => {
 	let todos: ITodo[] = []
+	let result: AxiosResponse | undefined = undefined
 	try {
-		todos = await axios.get('/todos')
-	} catch (e) {
-		console.log(e)
+		result = await axios.get('/todos')
+		todos = result?.data
+	} catch (error) {
+		console.log(error)
 	}
 	return todos
 }
 
 // [Nest] 2548  - 08/21/2023, 1:01:56 PM     LOG [RouterExplorer] Mapped {/todos, POST} route +2ms
 export const createTodo = async (todo: ITodo): Promise<ITodo> => {
-	let result: ITodo| null = null
-	console.log('create', todo);
+	let result: ITodo | null = null
 	try {
 		result = await axios.post('/todos', todo)
-	} catch (e) {
-		console.log(e)
+	} catch (error) {
+		console.log(error)
 	}
 	return result as ITodo
 }
@@ -29,7 +30,7 @@ export const createTodo = async (todo: ITodo): Promise<ITodo> => {
 export const getTodo = async (id: number): Promise<ITodo> => {
 	let todo: ITodo | null = null
 	try {
-		todo = await axios.get(`todo/${id}`)
+		todo = await axios.get(`todos/${id}`)
 	} catch (error) {
 		console.log(error);
 	}
@@ -37,21 +38,22 @@ export const getTodo = async (id: number): Promise<ITodo> => {
 
 }
 // [Nest] 2548  - 08/21/2023, 1:01:56 PM     LOG [RouterExplorer] Mapped {/todos/:id, PATCH} route +1ms
-export const editTodo = async (id: number): Promise<ITodo> => {
-	let todo: ITodo | null = null
+export const editTodo = async (id: number, todo: ITodo): Promise<AxiosResponse> => {
+	// let todo: ITodo | null = null
+	let result: AxiosResponse | undefined = undefined
 	try {
-		todo = await axios.patch(`todo/${id}`)
+		result = await axios.patch(`todos/${id}`, todo)
 	} catch (error) {
 		console.log(error);
 	}
-	return todo as ITodo
+	return result as AxiosResponse
 
 }
 // [Nest] 2548  - 08/21/2023, 1:01:56 PM     LOG [RouterExplorer] Mapped {/todos/:id, DELETE} route +1ms
 export const deleteTodo = async (id: number): Promise<ITodo> => {
 	let todo: ITodo | null = null
 	try {
-		todo = await axios.delete(`todo/${id}`)
+		todo = await axios.delete(`todos/${id}`)
 	} catch (error) {
 		console.log(error);
 	}

@@ -8,9 +8,13 @@ import { onMounted } from 'vue';
 
 const store = useTodoStore()
 const { todos } = storeToRefs(store)
-const {onDelete, onEdit } = store
-onMounted(()=>{
-    // store.fetchTodos()
+const { onDelete, onEdit } = store
+
+onMounted(async () => {
+  //store.getAuth()
+  store.getTodos
+  console.log(store.$state);
+  //console.log(todos);
 })
 
 
@@ -37,11 +41,11 @@ onMounted(()=>{
           {{ todo.IDescription }}
         </p>
         <button @click="onEdit(todo.ITodoID as number)"
-          class="mr-2 mt-2 font-semibold bg-blue-600 rounded h-full px-3.5 py-1.5 hover:scale-110 w-24 ml-auto">
+          class=" mt-1 font-semibold bg-blue-600 rounded h-full px-4 py-1 hover:scale-110  ml-auto text-sm">
           Edit
         </button>
         <button @click="onDelete(todo.ITodoID as number)"
-          class="mt-2 font-semibold bg-red-600 rounded h-full px-3.5 py-1.5 hover:scale-110 w-24 ml-auto">
+          class="mt-1 font-semibold bg-red-600 rounded h-full px-2 py-1 hover:scale-110  ml-auto text-sm">
           Delete
         </button>
       </li>

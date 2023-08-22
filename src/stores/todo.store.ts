@@ -2,31 +2,31 @@
 
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
-import { v4 as uuidv4 } from 'uuid'
 import { getTodos, getTodo, createTodo, deleteTodo, editTodo } from '@/api/fetch'
 import type { ITodo } from '@/Types/Todo'
-
 
 export const useTodoStore = defineStore('todoStore', {
   state: () => {
     return {
       description: null as unknown as string,
-      completionDate: null as unknown as Date, 
+      completionDate: null as unknown as Date,
       todo: null as unknown as ITodo,
       todos: [] as unknown as ITodo[],
       authenticated: false as boolean,
+      edit: false as boolean,
+      todoID: null as unknown as number,
     }
   },
   getters: {
-    getAuth(state) {
+    getAuth(): boolean {
       return this.authenticated
     },
     // /todos
-    async fetchTodos():Promise <void> {
-      try{
+    getTodos: async function (): Promise<void> {
+      try {
         this.todos = await getTodos()
       }
-      catch(error){
+      catch (error) {
         console.log(error);
       }
 
@@ -35,33 +35,61 @@ export const useTodoStore = defineStore('todoStore', {
     async getTodo(state) {
 
     },
-
-
   },
-  actions: { 
+  actions: {
     setAuth() {
       this.authenticated = !this.authenticated
     },
-
-    setDescription(description:string){
+    setDescription(description: string) {
       this.description = description
     },
     // DELETE /todos/:id
-    async onDelete(taskID: number) {
+    async onDelete(ITodoID: number) {
+      try {
+        await deleteTodo(ITodoID)
+      } catch (error) {
+        console.log(error);
+      }
 
+    },
+    //  onEdit - helper
+    async onEdit(ITodoID: number) {
+      this.edit = true
+      this.todos.filter((todo) => {
+        if (ITodoID == todo.ITodoID) {
+          this.todoID = todo.ITodoID
+          this.completionDate = todo.ICompletionDate
+          this.description = todo.IDescription
+        }
+      })
     },
     // PATCH /todos/:id
-    async onEdit(taskID: number) {
-
+    async updateTodo(ITodoID: number, completionDate: Date, description: string) {
+      const todo: ITodo = {
+        ICompletionDate: completionDate,
+        IDescription: description,
+        IComplete: false
+      }
+      try {
+        await editTodo(ITodoID, todo)
+      } catch (error) {
+        console.log(error);
+      }
+      this.edit = false
     },
     // POST /todos
-    async onSubmit(completionDate:Date, description:string) {
-      const todo:ITodo = {
-        ICompletionDate:completionDate,
-        IDescription : description,
-        IComplete : false
+    async onSubmit(completionDate: Date, description: string) {
+      const todo: ITodo = {
+        ICompletionDate: completionDate,
+        IDescription: description,
+        IComplete: false
       }
-       await createTodo(todo)
+      try {
+        await createTodo(todo)
+      } catch (error) {
+        console.log(error);
+      }
+
     }
   }
 })
