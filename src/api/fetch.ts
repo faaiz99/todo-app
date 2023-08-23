@@ -3,7 +3,7 @@ import axios, { type AxiosResponse } from 'axios'
 axios.defaults.baseURL = 'http://localhost:3000'
 
 // [Nest] 2548  - 08/21/2023, 1:01:56 PM     LOG [RouterExplorer] Mapped {/todos, GET} route +0ms
-export const getTodos = async (): Promise<ITodo[]> => {
+export const fetchTodos = async (): Promise<ITodo[]> => {
 	let todos: ITodo[] = []
 	let result: AxiosResponse | undefined = undefined
 	try {
@@ -29,8 +29,11 @@ export const createTodo = async (todo: ITodo): Promise<ITodo> => {
 // [Nest] 2548  - 08/21/2023, 1:01:56 PM     LOG [RouterExplorer] Mapped {/todos/:id, GET} route +0ms
 export const getTodo = async (id: number): Promise<ITodo> => {
 	let todo: ITodo | null = null
+	let result: AxiosResponse | undefined = undefined
+
 	try {
-		todo = await axios.get(`todos/${id}`)
+		result = await axios.get(`todos/${id}`)
+		todo = result?.data
 	} catch (error) {
 		console.log(error);
 	}

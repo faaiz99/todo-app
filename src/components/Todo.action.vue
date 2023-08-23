@@ -1,22 +1,22 @@
-<!-- eslint-disable vue/multi-word-component-names -->
-<!-- eslint-disable vue/valid-v-for -->
+<!-- eslint-disable @typescript-eslint/no-unused-vars -->
 <!-- eslint-disable vue/multi-word-component-names -->
 <script setup lang="ts">
 import { useTodoStore } from '../stores/todo.store'
 import { storeToRefs } from 'pinia'
-import { onMounted } from 'vue';
+import { onMounted, watch, watchEffect } from 'vue';
 
 const store = useTodoStore()
-const { todos } = storeToRefs(store)
-const { onDelete, onEdit } = store
+const { todos, completionDate, description, edit, todoID, result } = storeToRefs(store)
+const { onDelete, getTodo, updateTodo, setComplete, getTodos } = store
 
 onMounted(async () => {
-  //store.getAuth()
   store.getTodos
-  console.log(store.$state);
-  //console.log(todos);
 })
 
+watch(result, ()=>{
+  store.getTodos
+  console.log('watcher triggered');
+})
 
 </script>
 
@@ -30,7 +30,12 @@ onMounted(async () => {
       <li class="sm:flex p-2.5 gap-4 justify-center mb-2" v-for="todo in todos" :key="todo.ITodoID">
         <div class="flex items-baseline">
           <label class="inline" for="completetodo"></label>
-          <input type="checkbox" id="completetodo" name="completetodo" @click="todo.IComplete = !todo.IComplete" />
+          <input type="checkbox" id="completetodo" name="completetodo" :disabled="todo.IComplete"
+            :checked="todo.IComplete" @click="() => {
+              setComplete()
+              updateTodo(todo.ITodoID as number, todo.ICompletionDate, todo.IDescription)
+            }
+              " />
           <p class="ml-5 mt-1 font-semibold text-sm relative text-zinc-800" :class="todo.IComplete ? 'line-through' : ''">
             {{ todo.ICompletionDate }}
           </p>
@@ -40,7 +45,7 @@ onMounted(async () => {
           :class="todo.IComplete ? 'line-through' : ''">
           {{ todo.IDescription }}
         </p>
-        <button @click="onEdit(todo.ITodoID as number)"
+        <button :disabled="todo.IComplete" @click="getTodo(todo.ITodoID as number)"
           class=" mt-1 font-semibold bg-blue-600 rounded h-full px-4 py-1 hover:scale-110  ml-auto text-sm">
           Edit
         </button>
